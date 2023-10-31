@@ -25,7 +25,7 @@ jobs:
           [ "$(echo "$NEW_SCORE > $THREESHOLD_SCORE" | bc)" -eq 1 ] && { echo "THREESHOLD_SCORE=$THREESHOLD_SCORE"; echo "$THREESHOLD_SCORE" > .pylint-score; }
           pylint --fail-under $THREESHOLD_SCORE `find . -name "*.py"`
       - name: Update new score
-        if: [$OLD_SCORE -lt $THREESHOLD_SCORE] 
+        if: [ "$(echo "$NEW_SCORE > $THREESHOLD_SCORE" | bc)" -eq 1 ]
         run: |
           git config --global user.name "BlackBot"
           git config --global author.name "BlackBot"
