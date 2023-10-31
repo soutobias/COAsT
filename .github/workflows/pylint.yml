@@ -17,7 +17,7 @@ jobs:
         run: pip install pylint
       - name: Check Score
         run: |
-          echo "Start checking code"
+          echo "Start checking scores"
           NEW_SCORE=$(pylint `find . -name "*.py"` | grep 'Your code has been rated' | awk '{print $10}' | awk -F/ '{print $1}')
           NEW_SCORE=$(echo "scale=2; $NEW_SCORE" | bc)
           echo NEW_SCORE=$NEW_SCORE
