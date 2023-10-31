@@ -1,5 +1,5 @@
 name: Pylint
-on: pull_request
+on: push
 jobs:
   formatting:
     runs-on: ubuntu-latest
