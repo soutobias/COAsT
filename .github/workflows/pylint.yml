@@ -19,7 +19,7 @@ jobs:
 
       - name: Check Score
         run: |
-          NEW_SCORE=$(pylint `find . -name "*.py"` | grep 'Your code has been rated' | awk '{print $10}' | awk -F/ '{print $1}')
+          NEW_SCORE=$(pylint `find . -name "*.py"` | grep 'Your code has been rated' | awk '{print $10}' | awk -F/ '{print $1}');
           OLD_SCORE=$(cat .pylint-score)
           THREESHOLD_SCORE=$OLD_SCORE
           if [ "$(echo "$NEW_SCORE > $THREESHOLD_SCORE" | bc)" -eq 1 ]; then
