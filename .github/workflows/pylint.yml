@@ -31,6 +31,15 @@ jobs:
             echo "Updating THREESHOLD_SCORE"
             echo THREESHOLD_SCORE=$NEW_SCORE
             echo "$THREESHOLD_SCORE" > .pylint-score
-            echo $GITHUB_HEAD_REF
+            git config --global user.name "PylintBot"
+            git config --global author.name "PylintBot"
+            git config --global user.email "bodcsoft@bodc.ac.uk"
+            git config --global author.email "bodcsoft@bodc.ac.uk"
+            git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
+            git checkout $GITHUB_HEAD_REF
+            git pull
+            git commit -am "Update pylint threeshold score"
+            git push
+          else
+            exit 1
           fi
-          pylint --fail-under $THREESHOLD_SCORE `find . -name "*.py"`;
