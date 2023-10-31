@@ -20,19 +20,19 @@ jobs:
       - name: Check Score
         run: |
           NEW_SCORE=$(pylint `find . -name "*.py"` | grep 'Your code has been rated' | awk '{print $10}' | awk -F/ '{print $1}');
-          OLD_SCORE=$(cat .pylint-score)
-          THREESHOLD_SCORE=$OLD_SCORE
+          OLD_SCORE=$(cat .pylint-score);
+          THREESHOLD_SCORE=$OLD_SCORE;
           if [ "$(echo "$NEW_SCORE > $THREESHOLD_SCORE" | bc)" -eq 1 ]; then
-            echo "THREESHOLD_SCORE=$THREESHOLD_SCORE"
-            echo "$THREESHOLD_SCORE" > .pylint-score
-            git config --global user.name "BlackBot"
-            git config --global author.name "BlackBot"
-            git config --global user.email "bodcsoft@bodc.ac.uk"
-            git config --global author.email "bodcsoft@bodc.ac.uk"
-            git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
-            git checkout $GITHUB_HEAD_REF
-            git pull
-            git commit -am "Update pylint score"
-            git push
+            echo "THREESHOLD_SCORE=$THREESHOLD_SCORE";
+            echo "$THREESHOLD_SCORE" > .pylint-score;
+            git config --global user.name "BlackBot";
+            git config --global author.name "BlackBot";
+            git config --global user.email "bodcsoft@bodc.ac.uk";
+            git config --global author.email "bodcsoft@bodc.ac.uk";
+            git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY;
+            git checkout $GITHUB_HEAD_REF;
+            git pull;
+            git commit -am "Update pylint score";
+            git push;
           fi
-          pylint --fail-under $THREESHOLD_SCORE `find . -name "*.py"`
+          pylint --fail-under $THREESHOLD_SCORE `find . -name "*.py";
